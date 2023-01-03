@@ -1,0 +1,31 @@
+import java.util.Arrays;
+class Solution {
+    public String longestPrefix(String s) {
+        char[] a = s.toCharArray();
+        int lps[] = new int[a.length];
+        int ans = 0;
+        int len = 0; int i = 1; int m = a.length;
+        while (i < m) {
+            if (a[i] == a[len]) {
+                len++;
+                lps[i] = len;
+                i++;
+            }
+            else{
+                if(len != 0){
+                    len = lps[len-1];
+                }
+                else{
+                    lps[i] = 0;
+                    i++;
+                }
+            }
+        }
+        // System.out.println(lps[m-1]);
+        String str = "";
+        for(int j = 0; j < lps[m-1]; j++){
+            str += a[j];
+        }
+        return str;
+    }
+}
